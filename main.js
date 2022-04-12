@@ -55,3 +55,18 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+// costanti
+
+const eleContainer = document.querySelector(".posts-list")
+const arrayLikes = [];
+
+console.log(eleContainer, arrayLikes);
+
+// creazione e stampa di una card sul DOM
+
+for (let i = 0; i < posts.length; i++){
+    const divCard = document.createElement("div");
+    divCard.classList.add("post");
+    divCard.dataset.postId = posts[i].id;
+   
