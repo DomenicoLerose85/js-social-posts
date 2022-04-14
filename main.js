@@ -65,8 +65,71 @@ console.log(eleContainer, arrayLikes);
 
 // creazione e stampa di una card sul DOM
 
-for (let i = 0; i < posts.length; i++){
+for (let i = 0; i < posts.length; i++) {
     const divCard = document.createElement("div");
     divCard.classList.add("post");
     divCard.dataset.postId = posts[i].id;
-   
+    if (posts[i].author.image == null) {
+        divCard.innerHTML = `
+        <div class="post__header">
+        <div class="post-meta">                    
+            <div class="post-meta__icon">
+                <div class="profile-pic-default">LF</div>                   
+            </div>
+            <div class="post-meta__data">
+                <div class="post-meta__author">${posts[i].author.name}</div>
+                <div class="post-meta__time">${posts[i].created}</div>
+            </div>                    
+        </div>
+        </div>
+        <div class="post__text">${posts[i].content}</div>
+        <div class="post__image">
+        <img src=${posts[i].media} alt="">
+        </div>
+        <div class="post__footer">
+        <div class="likes js-likes">
+            <div class="likes__cta">
+                <a class="like-button  js-like-button  ${arrayLikes.includes(posts[i].id) ? 'like-button--liked' : ''}" href="#!">
+                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                    <span class="like-button__label">Mi Piace</span>
+                </a>
+            </div>
+            <div class="likes__counter">
+                Piace a <b class="js-likes-counter">${posts[i].likes}</b> persone
+            </div>
+        </div> 
+        </div>`
+    } else {
+        divCard.innerHTML = `
+        <div class="post__header">
+          <div class="post-meta">                    
+    <div class="post-meta__icon">
+        <img class="profile-pic" src=${posts[i].author.image} alt=${posts[i].author.name}>                    
+    </div>
+    <div class="post-meta__data">
+        <div class="post-meta__author">${posts[i].author.name}</div>
+        <div class="post-meta__time">${posts[i].created}</div>
+    </div>                    
+    </div>
+    </div>
+    <div class="post__text">${posts[i].content}</div>
+    <div class="post__image">
+    <img src=${posts[i].media} alt="">
+    </div>
+    <div class="post__footer">
+    <div class="likes js-likes">
+    <div class="likes__cta">
+        <a class="like-button  js-like-button ${arrayLikes.includes(posts[i].id) ? 'like-button--liked' : ''}" href="#!">
+            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+            <span class="like-button__label">Mi Piace</span>
+        </a>
+    </div>
+    <div class="likes__counter">
+        Piace a <b class="js-likes-counter">${posts[i].likes}</b> persone
+    </div>
+    </div> 
+    </div>`;
+    eleContainer.append(divCard);
+}
+};
+
